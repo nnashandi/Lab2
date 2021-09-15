@@ -4,6 +4,7 @@ import ballerina/http;
 type userDetails record {|
     string username;
     string lastname;
+    string firstname;
 
 |};
 
@@ -21,5 +22,11 @@ service /users on new http:Listener(8080) {
         all_users.push(newUser);
         return {done: "ok"};
 
+    }
+
+    resource function get one/[string username]/[string lastname] () returns json {
+        io:println("handlind get one user");
+        return {username: username, lastName: lastname};
+        
     }
 }
